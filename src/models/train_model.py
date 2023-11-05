@@ -61,7 +61,7 @@ def ValidateToxicTextClassifier(model, dataloader, device, best_f1, save_name = 
         save_name(str): The name of the saved checkpoint after finishing training
         training(bool): training mode (to know if the model should be saved after validation is done)
     Returns:
-        dict: A dictionary containing validation metrics (accuracy, micro F1, macro F1).
+        dict: A dictionary containing validation metrics (accuracy, macro F1).
     """
 
     model.eval()
@@ -76,17 +76,14 @@ def ValidateToxicTextClassifier(model, dataloader, device, best_f1, save_name = 
             outputs = model(ids, mask, token_type_ids)
             fin_targets.extend(targets.cpu().detach().numpy().tolist())
             fin_outputs.extend(torch.sigmoid(outputs).cpu().detach().numpy().tolist())
-            if _ > 100:
-                break
-    
-    fin_outputs = outputs.cpu().detach().numpy() >= 0.5
-    
+            
+    fin_outputs = (np.array(fin_outputs) >= 0.5).tolist()
     accuracy = metrics.accuracy_score(fin_targets, fin_outputs)
-    f1_score_micro = metrics.f1_score(fin_targets, fin_outputs, average='micro')
-    if f1_score_micro > best_f1 and training:
+    f1_score_macro = metrics.f1_score(fin_targets, fin_outputs, average='macro')
+    if f1_score_macro > best_f1 and training:
         model.save_pretrained(checkpoint_dir + checkpoint_name)
 
-    return {'accuracy' : accuracy, 'f1_score_micro' : f1_score_micro}
+    return {'accuracy' : accuracy, 'f1_score_macro' : f1_score_macro}
 
 def TrainToxicTextClassifier(model, train_dataloader, validate_dataloader, device, loss_fn, optimizer, epochs, save_name):
     """
