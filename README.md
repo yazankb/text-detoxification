@@ -16,7 +16,6 @@ The project directory is structured as follows:
 - **data**: This directory contains subdirectories for managing data:
   - **raw**: Stores the original, immutable data used in the project.
 
-- **models**: [Link to Models](https://github.com/your-username/your-repository/models)
 - **notebooks**: This directory contains Jupyter notebooks used for various stages of the project. Notebooks follow a naming convention for easy ordering and identification.
 
 - **reports**: Contains generated analysis and reports in various formats such as HTML, PDF, and LaTeX.
@@ -25,6 +24,7 @@ The project directory is structured as follows:
 
 - **src**: The source code directory contains subdirectories for different project components:
   - **data**: Includes scripts for data downloading and preprocessing.
+  - **models**: Contains scripts for training and making predictions using machine learning models.
   - **visualization**: Includes scripts for creating exploratory and results-oriented visualizations.
 
 ## Usage
