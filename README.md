@@ -25,7 +25,6 @@ The project directory is structured as follows:
 
 - **src**: The source code directory contains subdirectories for different project components:
   - **data**: Includes scripts for data downloading and preprocessing.
-  - **models**: Contains scripts for training and making predictions using machine learning models.
   - **visualization**: Includes scripts for creating exploratory and results-oriented visualizations.
 
 ## Usage
